@@ -3,7 +3,10 @@ import security_info
 import json
 import randomtweets
 import random
+
+
 app = Flask(__name__)
+app.secret_key = security_info.APP_SECRET_KEY
 
 @app.route("/", methods=["GET", "POST"])
 def index():
@@ -21,12 +24,11 @@ def index():
             tweet_mimic = randomtweets.print_mimic(mimic_dict, word) 
     return render_template('index.html', username=username, tweet=tweet_mimic, error=error)
 
+
 @app.route('/about/')
 def about():
     return render_template('about.html')
 
-    
 
 if __name__ == "__main__":
-    app.secret_key = security_info.APP_SECRET_KEY
     app.run(debug=True)
